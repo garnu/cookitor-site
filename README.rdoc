@@ -1,0 +1,3 @@
+== Cookitor
+
+Cookitor is simple web application to read Ruby on Rails session cookies. Rails session cookies are marshaled Hash encoded in base64 on browsers.

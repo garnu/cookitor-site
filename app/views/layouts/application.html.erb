@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cookitor: Decode Ruby on Rails session cookie</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+</head>
+<body>
+	<header>
+		<%= image_tag("cookitor-logo.png", id: "logo") %>
+		<h1 id="title">Cookitor</h1>
+		<h2 id="tagline">a Ruby on Rails session cookie decoder</h2>
+	</header>
+<%= yield %>
+	<footer>
+    <div id="footer-content">Made by Garnu.</div>
+	</footer>
+</body>
+</html>

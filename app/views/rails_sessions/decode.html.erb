@@ -1,0 +1,27 @@
+<div id="data">
+	<h3>Data</h3>
+	<div id="highlighted">
+		<div id="highlighted-data" class="highlight block">
+			<span class="curly-bracket">{</span><br />
+			<% @decoder.data.each do |key, value| %>
+				<span class="line">
+					<span class="key"><a title="<%= key.class %>"><%= key.inspect %></a></span>
+					<span class="arrow">=></span>
+					<span class="value"><a title="<%= value.class %>"><%= value.inspect %></a></span>
+				</span>
+				<br />
+			<% end %>
+			<span class="curly-bracket">}</span><br />
+		</div>
+	</div>
+	<div id="raw" class="block">
+		<code id="raw-data"><%= @decoder.data %></code>
+	</div>
+	<div id="toolbar">
+		<a id="highlight-button" class="selected">Highlight</a> | <a id="raw-button">Raw</a>
+	</div>
+</div>
+<div id="hmac">
+	<h3>HMAC</h3>
+	<code id="hmac-value" class="block"><%= @decoder.hash %></code>
+</div>

@@ -1,0 +1,8 @@
+
+<%= form_tag(decode_path, method: "post", id: "processing-form") do %>
+  <%= label_tag(:content, "Encoded cookie content:") %>
+  <%= text_area_tag(:content) %>
+  <%= submit_tag("Decode", class: "decode") %>
+<% end %>
+
+<div id="response"></div>

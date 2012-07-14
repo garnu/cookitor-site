@@ -1,0 +1,47 @@
+
+.block {
+	border: 1px solid #A0A0A0;
+  background-color: white;
+  padding: 4px;
+  display: block;
+  overflow: auto;
+ }
+
+.highlight {
+	.line {
+		margin-left: 12px;
+		margin-right: 10px;
+	}
+	.curly-bracket, .arrow {
+		font-weight: bold;
+	}
+	.key {
+		color: red;
+	}
+	.value {
+		color: blue;
+	}
+}
+
+#toolbar {
+  float: right;
+  font-size: 10px;
+  margin-right: 10px;
+	  a {
+		  cursor: pointer;
+		}
+		.selected {
+		  font-weight: bold;
+		}
+}
+
+#raw-data {
+  font-size: 14px;
+  font-family: monospace;
+}
+
+#hmac-value {
+  text-align: center;
+  font-size: 14px;
+  font-family: monospace;
+}
