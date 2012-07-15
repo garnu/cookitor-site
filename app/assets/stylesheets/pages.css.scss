@@ -70,6 +70,16 @@ textarea, input {
 	margin-bottom: 18px;
 }
 
+#extension {
+  margin: 0px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+    a, a:visited, a:hover, a:active {
+      color: #202020;
+    }
+}
+
 footer {
   height: 60px;
   position: relative;
