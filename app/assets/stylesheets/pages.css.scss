@@ -90,4 +90,11 @@ footer {
   bottom: 3px;
   right: 0;
   font-size: 10px;
+    a, a:visited, a:hover, a:active {
+      color: #202020;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
 }
