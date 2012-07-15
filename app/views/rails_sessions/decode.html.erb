@@ -2,16 +2,20 @@
 	<h3>Data</h3>
 	<div id="highlighted">
 		<div id="highlighted-data" class="highlight block">
+			<% if @decoder.data.respond_to?(:each) %>
 			<span class="curly-bracket">{</span><br />
-			<% @decoder.data.each do |key, value| %>
-				<span class="line">
-					<span class="key"><a title="<%= key.class %>"><%= key.inspect %></a></span>
-					<span class="arrow">=></span>
-					<span class="value"><a title="<%= value.class %>"><%= value.inspect %></a></span>
-				</span>
-				<br />
-			<% end %>
+				<% @decoder.data.each do |key, value| %>
+					<span class="line">
+						<span class="key"><a title="<%= key.class %>"><%= key.try(:inspect) %></a></span>
+						<span class="arrow">=></span>
+						<span class="value"><a title="<%= value.class %>"><%= value.try(:inspect) %></a></span>
+					</span>
+					<br />
+				<% end %>
 			<span class="curly-bracket">}</span><br />
+			<% else %>
+				<%= @decoder.data.inspect %>
+			<% end %>
 		</div>
 	</div>
 	<div id="raw" class="block">
