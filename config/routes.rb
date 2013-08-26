@@ -3,5 +3,5 @@ Cookitor::Application.routes.draw do
 
   post "decode" => "rails_sessions#decode"
   
-  match "ping"  => "pages#ping"
+  get "ping"  => "pages#ping"
 end

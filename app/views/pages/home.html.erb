@@ -2,6 +2,8 @@
 <%= form_tag(decode_path, method: "post", id: "processing-form") do %>
   <%= label_tag(:content, "Encoded cookie content:") %>
   <%= text_area_tag(:content) %>
+  <%= label_tag(:key_value, "Secret key base (Rails 4):") %>
+  <%= text_field_tag(:key_value, session[:key]) %>
   <%= submit_tag("Decode", class: "decode") %>
 <% end %>
 

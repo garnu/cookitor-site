@@ -49,6 +49,13 @@ label, textarea, input {
   font-family: monospace;
 }
 
+#key_value {
+  min-width: 330px;
+  width: 100%;
+  font-size: 14px;
+  font-family: monospace;
+}
+
 textarea, input {
   margin-bottom: 5px;
 }

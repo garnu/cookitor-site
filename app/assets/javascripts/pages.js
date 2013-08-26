@@ -21,7 +21,8 @@ $(document).ready(function() {
 		  type: 'POST',
 		  url: $('#processing-form').attr('action'),
 		  data: {
-		  	content: $('#content').val()
+		  	content: $('#content').val(),
+        key_value: $('#key_value').val()
 		  },
 		  success: function(data) {
 		  	$('#response').html(data);

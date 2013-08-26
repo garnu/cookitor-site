@@ -1,9 +1,22 @@
 module RailsSession
 	class Decoder
+		KEY_ITERATIONS = 1000
+		ENCRYPTED_COOKIE_SALT = "encrypted cookie"
+		ENCRYPTED_SIGNED_COOKIE_SALT = "signed encrypted cookie"
+
 		attr_reader :data, :hash, :error
-		def initialize(content)
+		def initialize(content, key = nil, opts = {})
 			if content.present? && content.size > 42 && content.size <= 4096
-				parse(content) unless content.blank?
+				unless content.blank?
+					if key.blank?
+						parse(content) 
+					else
+						opts[:iterations] 									||= RailsSession::Decoder::KEY_ITERATIONS
+						opts[:encrypted_cookie_salt]				||= RailsSession::Decoder::ENCRYPTED_COOKIE_SALT
+						opts[:encrypted_signed_cookie_salt]	||= RailsSession::Decoder::ENCRYPTED_SIGNED_COOKIE_SALT
+						decrypt(content, key, opts)
+					end
+				end
 			else
 				@error = "Invalid cookie."
 			end
@@ -14,6 +27,21 @@ module RailsSession
 		end
 
 		private
+
+		def decrypt(content, key, opts)
+			clean_content = CGI.unescape(content.split("\n").join)
+			content_parts = clean_content.split('--')
+			key_generator = ActiveSupport::KeyGenerator.new(key, iterations: opts[:iterations])
+			secret = key_generator.generate_key(opts[:encrypted_cookie_salt])
+			sign_secret = key_generator.generate_key(opts[:encrypted_signed_cookie_salt])
+			encryptor = ActiveSupport::MessageEncryptor.new(secret, sign_secret)
+			@data = encryptor.decrypt_and_verify(clean_content)
+			@hash = content_parts.last
+		rescue Exception => e
+			@data = nil
+			@hash = nil
+			@error = e.to_s
+		end
 
 		def parse(content)
 			clean_content = CGI.unescape(content.split("\n").join)
