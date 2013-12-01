@@ -52,7 +52,7 @@ module SecureMarshal
       else
         raise "The Marshal dump contains unsupported type"
       end
-      result = result.taint if @tainted
+      result = result.taint if @tainted && !result.frozen?
       
       result
     end
