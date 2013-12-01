@@ -57,6 +57,7 @@ module RailsSession
 					@data = nil
 					@hash = nil
 					@error = e.to_s
+					@error = "The cookie doesn't seem valid. If it's Rails 4 session cookie make sure to provide its secret key base." unless clean_content.start_with? "BAh7"
 				end
 			else
 				@error = "Invalid format: couldn't split between the data and the HMAC."
