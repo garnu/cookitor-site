@@ -34,7 +34,7 @@ module RailsSession
 			key_generator = ActiveSupport::KeyGenerator.new(key, iterations: opts[:iterations])
 			secret = key_generator.generate_key(opts[:encrypted_cookie_salt])
 			sign_secret = key_generator.generate_key(opts[:encrypted_signed_cookie_salt])
-			encryptor = ActiveSupport::MessageEncryptor.new(secret, sign_secret)
+			encryptor = ActiveSupport::MessageEncryptor.new(secret, sign_secret, {serializer: SecureMarshal::Parser})
 			@data = encryptor.decrypt_and_verify(clean_content)
 			@hash = content_parts.last
 		rescue Exception => e
@@ -51,7 +51,7 @@ module RailsSession
 				begin
 					decoded = Base64.decode64(content_parts.first).taint.to_s
 					Rails.logger.debug "Decoded from base64: #{decoded.inspect}"
-					@data = Marshal.load(decoded).taint
+					@data = SecureMarshal::Parser.load(decoded).taint
 					Rails.logger.debug "Loaded object #{@data.inspect}"
 				rescue Exception => e
 					@data = nil

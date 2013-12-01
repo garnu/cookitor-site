@@ -1,0 +1,1 @@
+require 'secure_marshal/configuration'
